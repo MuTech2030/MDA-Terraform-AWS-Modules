@@ -1,14 +1,14 @@
 
 
 resource "aws_db_subnet_group" "this" {
-  name       = "rds-subnet-group"
+  name       = var.aws_db_subnet_group_name
   subnet_ids = data.aws_subnets.rds_subnets.ids
   tags       = var.tags
 }
 
 resource "aws_db_instance" "this" {
   allocated_storage       = var.allocated_storage
-  engine                  = "postgres"
+  engine                  = var.engine
   engine_version          = var.engine_version
   instance_class          = var.instance_class
   db_name                 = var.db_name
