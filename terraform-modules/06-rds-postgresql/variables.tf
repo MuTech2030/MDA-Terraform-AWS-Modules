@@ -8,6 +8,10 @@ variable "engine" {
 
 
 
+variable "aws_db_subnet_group_name_id" {
+    type = list(string)
+  
+}
 variable "aws_db_subnet_group_name" {
   type = string
 }

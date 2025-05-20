@@ -2,7 +2,7 @@
 
 resource "aws_db_subnet_group" "this" {
   name       = var.aws_db_subnet_group_name
-  subnet_ids = data.aws_subnets.rds_subnets.ids
+  subnet_ids = var.aws_db_subnet_group_name_id
   tags       = var.tags
 }
 
