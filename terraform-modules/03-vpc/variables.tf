@@ -7,8 +7,9 @@ variable "private_subnets" {
   type = map(object({
     cidr_block = string
     name       = string
+    az         = optional(string)  # optional AZ
   }))
-  description = "Map of AZ to subnet CIDR and name"
+  description = "Map of subnet name to CIDR, name, and optional AZ"
 }
 
 variable "tags" {

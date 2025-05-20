@@ -11,9 +11,11 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "private" {
   for_each = var.private_subnets
 
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = each.value.cidr_block
-  availability_zone = each.key
+  vpc_id     = aws_vpc.main.id
+  cidr_block = each.value.cidr_block
+
+  # Use the provided AZ if set, otherwise omit AZ (AWS will pick one)
+  availability_zone = lookup(each.value, "az", null)
 
   tags = merge(var.tags, {
     Name = each.value.name
