@@ -31,8 +31,9 @@ variable "publicly_accessible" {
   type = bool
 }
 
-variable "db_subnet_group_name" {
-  type = string
+variable "rds_subnet_names" {
+  description = "List of subnet names to use for the RDS subnet group"
+  type        = list(string)
 }
 
 variable "vpc_security_group_ids" {

@@ -1,3 +1,16 @@
+data "aws_subnets" "rds_subnets" {
+  filter {
+    name   = "tag:Name"
+    values = var.rds_subnet_names
+  }
+}
+
+resource "aws_db_subnet_group" "this" {
+  name       = "rds-subnet-group"
+  subnet_ids = data.aws_subnets.rds_subnets.ids
+  tags       = var.tags
+}
+
 resource "aws_db_instance" "this" {
   allocated_storage       = var.allocated_storage
   engine                  = "postgres"
@@ -8,7 +21,7 @@ resource "aws_db_instance" "this" {
   password                = var.password
   skip_final_snapshot     = var.skip_final_snapshot
   publicly_accessible     = var.publicly_accessible
-  db_subnet_group_name    = var.db_subnet_group_name
+  db_subnet_group_name    = aws_db_subnet_group.this.name
   vpc_security_group_ids  = var.vpc_security_group_ids
   tags                    = var.tags
 }
