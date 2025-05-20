@@ -1,16 +1,18 @@
 variable "vpc_cidr" {
-  type = string
+  type        = string
+  description = "CIDR block for the VPC"
 }
 
-variable "private_subnet_map" {
-  type = map(string)
-  description = "Map of AZ to CIDR block for private subnets"
-}
-
-variable "name_prefix" {
-  type = string
+variable "private_subnets" {
+  type = map(object({
+    cidr_block = string
+    name       = string
+  }))
+  description = "Map of AZ to subnet CIDR and name"
 }
 
 variable "tags" {
-  type = map(string)
+  type        = map(string)
+  description = "Tags to apply to resources"
+  default     = {}
 }

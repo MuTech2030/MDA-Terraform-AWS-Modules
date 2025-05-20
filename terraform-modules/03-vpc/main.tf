@@ -1,7 +1,7 @@
 #######################################
 # VPC with Private Subnets Only
 #######################################
-resource "aws_vpc" "this" {
+resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
   enable_dns_hostnames = true
@@ -9,13 +9,13 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_subnet" "private" {
-  for_each = { for az, cidr in var.private_subnet_map : az => cidr }
+  for_each = var.private_subnets
 
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = each.value
-  availability_zone       = each.key
-  map_public_ip_on_launch = false
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = each.value.cidr_block
+  availability_zone = each.key
+
   tags = merge(var.tags, {
-    Name = "${var.name_prefix}-private-${each.key}"
+    Name = each.value.name
   })
 }
