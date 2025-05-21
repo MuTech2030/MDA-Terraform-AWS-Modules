@@ -2,7 +2,7 @@ variable "eks_iam_role_name" {
   type = string
   description = "the name of the eks IAM role"
 }
-variable "name" {
+variable "eks_control_plane_name" {
   description = "Name of the EKS cluster"
   type        = string
 }
