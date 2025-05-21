@@ -7,10 +7,7 @@ resource "aws_iam_role" "eks_cluster" {
   assume_role_policy = data.aws_iam_policy_document.eks_assume_role.json
 }
 
-variable "name" {
-  type = "string"
-  description = "the name of the eks IAM role"
-}
+
 
 resource "aws_iam_role_policy_attachment" "eks_policy" {
   role       = aws_iam_role.eks_cluster.name
