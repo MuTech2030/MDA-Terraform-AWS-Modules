@@ -1,9 +1,9 @@
 #######################################
-# 01 - EKS_IAM_Role Module
+# 01 - EKS_IAM_Role*Policy*Attachement*EKS_Control_Plane Module
 #######################################
 # modules/eks_iam_role/main.tf
 resource "aws_iam_role" "eks_cluster" {
-  name = var.name
+  name = var.eks_iam_role_name
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
@@ -22,5 +22,18 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_AmazonEKSClusterPolicy" {
 }
 
 
+resource "aws_eks_cluster" "this" {
+  name     = var.name
+  role_arn = var.role_arn
+  version  = var.k8s_version
+
+  vpc_config {
+    subnet_ids             = var.subnet_ids
+    security_group_ids     = var.security_group_ids
+    endpoint_public_access = true
+  }
+
+  tags = var.tags
+}
 
 
