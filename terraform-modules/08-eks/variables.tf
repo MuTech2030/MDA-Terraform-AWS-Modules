@@ -7,10 +7,7 @@ variable "eks_control_plane_name" {
   type        = string
 }
 
-variable "role_arn" {
-  description = "IAM role ARN for the EKS cluster"
-  type        = string
-}
+
 
 variable "k8s_version" {
   description = "Kubernetes version"
