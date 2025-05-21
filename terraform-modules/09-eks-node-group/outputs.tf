@@ -3,7 +3,3 @@ output "node_role_arn" {
   description = "ARN of the IAM role for node group"
 }
 
-
-output "node_group_name" {
-  value = aws_eks_node_group.this.node_group_name
-}
