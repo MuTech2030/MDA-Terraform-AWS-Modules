@@ -119,11 +119,16 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
     id     = "log"
     status = var.apply_lifecycle_rules ? "Enabled" : "Disabled"
 
+    filter {
+      prefix = "" # Match all objects
+    }
+
     expiration {
       days = 365
     }
   }
 }
+
 
 resource "aws_s3_bucket_logging" "this" {
   count  = var.enable_logging ? 1 : 0
