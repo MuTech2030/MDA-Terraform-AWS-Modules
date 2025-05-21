@@ -10,7 +10,6 @@ variable "policy_arns" {
 
 variable "cluster_name" {}
 variable "node_group_name" {}
-variable "node_role_name" {}
 variable "subnet_ids" {
   type = list(string)
 }
@@ -29,6 +28,4 @@ variable "instance_types" {
 variable "tags" {
   type = map(string)
 }
-variable "policy_arns" {
-  type = list(string)
-}
+
