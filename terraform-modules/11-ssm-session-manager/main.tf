@@ -1,3 +1,7 @@
+###########################
+# MODULE: modules/ssm/main.tf
+###########################
+
 resource "aws_iam_role" "ssm_instance_role" {
   name = var.instance_role_name
 
@@ -11,6 +15,8 @@ resource "aws_iam_role" "ssm_instance_role" {
       }
     }]
   })
+
+  tags = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "ssm_core" {
@@ -27,9 +33,9 @@ resource "aws_ssm_document" "ssm_session_settings" {
   name          = "SSM-SessionManagerRunShell"
   document_type = "Session"
   content = jsonencode({
-    schemaVersion = "1.0"
-    description   = "SSM Session Manager Run Shell"
-    sessionType   = "Standard_Stream"
+    schemaVersion = "1.0",
+    description   = "SSM Session Manager Run Shell",
+    sessionType   = "Standard_Stream",
     inputs = {
       shellProfile = {
         linux = "sudo su -"

@@ -1,4 +1,15 @@
+
+###########################
+# MODULE: modules/ssm/variables.tf
+###########################
+
 variable "instance_role_name" {
   type        = string
-  description = "Name of the IAM role to attach to EC2 instances for SSM access"
+  description = "Name for the EC2 instance role"
+}
+
+variable "tags" {
+  type        = map(string)
+  default     = {}
+  description = "Tags to apply to IAM resources"
 }
