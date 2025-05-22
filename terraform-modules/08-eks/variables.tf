@@ -1,3 +1,11 @@
+variable "aws_auth_roles" {
+  description = "List of IAM roles to map in aws-auth configmap"
+  type = list(object({
+    rolearn  = string
+    username = string
+    groups   = list(string)
+  }))
+}
 variable "eks_iam_role_name" {
   type = string
   description = "the name of the eks IAM role"
