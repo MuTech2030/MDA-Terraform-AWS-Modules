@@ -10,6 +10,8 @@ resource "aws_iam_openid_connect_provider" "oidc" {
   client_id_list  = ["sts.amazonaws.com"]
   thumbprint_list = [var.thumbprint]
   url             = data.aws_eks_cluster.cluster.identity[0].oidc[0].issuer
+    depends_on = [var.eks_control_plane_dependency]
+
 }
 
 resource "aws_iam_role" "workload_identity_role" {
@@ -41,4 +43,3 @@ resource "aws_iam_role_policy_attachment" "policy_attach" {
 }
 
 
-depends_on = [module.eks_control_plane]
