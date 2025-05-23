@@ -27,8 +27,5 @@ variable "tags" {
   type = map(string)
   default = {}
 }
-variable "eks_control_plane_dependency" {
-  description = "Fake variable to use as a depends_on workaround"
-  type        = any
-}
+
 
